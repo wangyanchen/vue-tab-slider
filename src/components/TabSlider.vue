@@ -6,7 +6,6 @@
       <component :is="leftComp"/>
     </div>
     <transition :name="transitionName">
-      <keep-alive>
         <router-view
           class="tab-slider__content"
           ref="currentPage"
@@ -14,7 +13,6 @@
           @touchmove.native="onTouchMove"
           @touchend.native="onTouchEnd">
         </router-view>
-        </keep-alive>
     </transition>
     <div
       ref="rightPage"
