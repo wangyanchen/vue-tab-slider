@@ -27,7 +27,6 @@ import { translate } from '@/common/js/util.js'
 export default {
 
   mounted() {
-  alert(1)
     this.maxMoveDistance = window.innerWidth
     this.minIndex = 0
     this.maxIndex = this.comp.length - 1 
@@ -78,7 +77,6 @@ export default {
   },
   methods: {
     updateRouter(el, component) {
-    alert(2)
       if (this.isDragedSlide) {
         const { name, path } = component
         name ? this.$router.push(name) : this.$router.push(path)
@@ -87,7 +85,6 @@ export default {
       }
     },
     onTouchStart(ev) {
-    alert(3)
       this.leftEl = this.$refs.leftPage ? this.$refs.leftPage : ''
       this.rightEl = this.$refs.rightPage ? this.$refs.rightPage : ''
       const touch = ev.changedTouches[0]
@@ -95,7 +92,6 @@ export default {
       this.touchStartTime = Date.now()
     },
     onTouchMove(ev) { // 页面向左滑，totaldiff小于0
-    alert(4)
       const touch = ev.changedTouches[0]
       const el = ev.currentTarget
       this.touch.x2 = touch.pageX
