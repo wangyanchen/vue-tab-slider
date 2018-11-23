@@ -45,9 +45,6 @@ export default {
     'default-index': {
       type: Number,
       default: -1
-    },
-    canScroll: {
-        default: true
     }
   },
   data() {
@@ -58,8 +55,7 @@ export default {
       touch: {},
       touchStartTime: 0,
       touchEndTime: 0,
-      totalDiff: 0,
-      canMove: true
+      totalDiff: 0
     }
   },
   computed: {
@@ -116,10 +112,6 @@ export default {
       translate(el, this.totalDiff, 0)
     },
     onTouchEnd(ev) {
-      if (!this.canMove) {
-          alert(1)
-          return
-      }
       const touch = ev.changedTouches[0]
       this.touch.x2 = touch.pageX
       const diff = this.touch.x2 - this.touch.x1
@@ -152,9 +144,6 @@ export default {
     }
   },
   watch: {
-    canScroll (val) {
-        this.canMove = val
-    },
     $route(to, from) {
       const fromIndex = this.comp.findIndex(comp => {
         return comp.name ? comp.name === from.name : new RegExp(`.*${comp.path}$`).test(from.path)
