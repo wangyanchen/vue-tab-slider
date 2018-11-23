@@ -7,11 +7,15 @@
     </div>
     <transition :name="transitionName">
         <router-view
+          v-if="canScroll"
           class="tab-slider__content"
           ref="currentPage"
           @touchstart.native="onTouchStart"
           @touchmove.native="onTouchMove"
           @touchend.native="onTouchEnd">
+        </router-view>
+        <router-view v-else class="tab-slider__content">
+
         </router-view>
     </transition>
     <div
@@ -45,6 +49,10 @@ export default {
     'default-index': {
       type: Number,
       default: -1
+    },
+    canScroll: {
+        type: Boolean,
+        default: true
     }
   },
   data() {
@@ -202,3 +210,4 @@ export default {
   }
 }
 </style>
+
