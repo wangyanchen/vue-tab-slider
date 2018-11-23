@@ -7,15 +7,11 @@
     </div>
     <transition :name="transitionName">
         <router-view
-          v-if="canScroll"
-          class="tab-slider__content"
+          class="tab-slider__content ttessdaaadddww"
           ref="currentPage"
           @touchstart.native="onTouchStart"
           @touchmove.native="onTouchMove"
           @touchend.native="onTouchEnd">
-        </router-view>
-        <router-view v-else class="tab-slider__content">
-
         </router-view>
     </transition>
     <div
@@ -51,7 +47,6 @@ export default {
       default: -1
     },
     canScroll: {
-        type: Boolean,
         default: true
     }
   },
@@ -63,7 +58,8 @@ export default {
       touch: {},
       touchStartTime: 0,
       touchEndTime: 0,
-      totalDiff: 0
+      totalDiff: 0,
+      canMove: true
     }
   },
   computed: {
@@ -120,6 +116,10 @@ export default {
       translate(el, this.totalDiff, 0)
     },
     onTouchEnd(ev) {
+      if (!this.canMove) {
+          alert(1)
+          return
+      }
       const touch = ev.changedTouches[0]
       this.touch.x2 = touch.pageX
       const diff = this.touch.x2 - this.touch.x1
@@ -152,6 +152,9 @@ export default {
     }
   },
   watch: {
+    canScroll (val) {
+        this.canMove = val
+    },
     $route(to, from) {
       const fromIndex = this.comp.findIndex(comp => {
         return comp.name ? comp.name === from.name : new RegExp(`.*${comp.path}$`).test(from.path)
